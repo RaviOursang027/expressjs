@@ -1,0 +1,184 @@
+
+// currentname with extention
+exports.renameFile = async (req, res) => {
+  const { currentName, newName } = req.body;
+
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  if (!currentName || !newName) {
+    return res.status(400).json({ error: 'Both currentName and newName are required' });
+  }
+
+  const bucketName = user.email;
+
+  // This is for file path
+  const folderStructure = `bucket/root-bucket/${bucketName}`;
+
+  // Construct absolute paths for the source and destination files
+  const sourcePath = path.resolve(__dirname, '..', folderStructure, currentName);
+
+  // Determine if the currentName has an extension
+  const extname = path.extname(currentName);
+  const newNameWithExtension = extname ? newName + extname : newName;
+  const destPath = path.resolve(__dirname, '..', folderStructure, newNameWithExtension);
+
+  fs.rename(sourcePath, destPath, (err) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Error renaming the file' });
+    }
+
+    res.json({ message: 'File renamed successfully' });
+  });
+}
+
+
+// favourite file add api
+const uuid = require('uuid');
+const FavoriteFile = require("../models/files");
+
+exports.favouriteFileAdd = async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const { fileName, filePath } = req.body;
+
+  try {
+    // Check if a file with the same filename exists for the same user
+    const existingFile = await FavoriteFile.findOne({ userId, fileName });
+
+    if (existingFile) {
+      // A file with the same filename exists; update the filepath if different
+      if (existingFile.filePath !== filePath) {
+        existingFile.filePath = filePath;
+        await existingFile.save();
+        return res.json({ message: 'File updated with new filepath', file: existingFile });
+      }
+      return res.status(400).json({ message: "File already in favorites" });
+    }
+
+    // Generate a unique fileId using uuid
+    const favFileId = uuid.v4();
+    const currentDate = new Date().toISOString();
+
+    const newFile = new FavoriteFile({
+      userId,
+      favFileId,
+      fileName,
+      filePath,
+      modifiedDate: currentDate,
+      size,
+    });
+
+    await newFile.save();
+    res.json({ message: 'File added to favorites', file: newFile });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to add to favorites' });
+  }
+}
+
+
+exports.favouriteFileRemove = async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const { fileName, filePath } = req.body;
+
+  if (!fileName || !filePath) {
+    return res.status(400).json({ message: 'Both fileName and filePath are required' });
+  }
+
+  try {
+    const file = await FavoriteFile.findOne({ userId, fileName, filePath });
+
+    if (!file) {
+      return res.status(404).json({ message: 'File not found' });
+    }
+
+    await FavoriteFile.findOneAndDelete({ userId, fileName, filePath });
+    res.json({ message: 'File removed from favorites', fileName, filePath });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
+
+
+// favourite file list
+exports.favouriteFileList = async (req, res) => {
+  const userId = req.user._id; // Assuming you have a user ID from authentication
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+  try {
+
+    const favoriteFiles = await FavoriteFile.find({ userId });
+    res.json({ message: 'Favorite files retrieved', files: favoriteFiles });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to retrieve favorite files' });
+  }
+};
+
+// movefile api
+const mv = require('mv');
+exports.moveFile = async (req, res) => {
+  const userId = req.user._id;
+  const user = await User.findById(userId);
+
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const bucketName = user.email;
+  const { sourceFolder, destinationFolder, fileName } = req.body;
+
+  // Ensure either sourceFolder or destinationFolder is provided
+  if (!sourceFolder && !destinationFolder) {
+    return res.status(400).json({ message: "Either sourceFolder or destinationFolder is required" });
+  }
+
+  const folderStructureSource = sourceFolder
+    ? `bucket/root-bucket/${bucketName}/${sourceFolder}`
+    : `bucket/root-bucket/${bucketName}`;
+  const folderStructureDestination = `bucket/root-bucket/${bucketName}/${destinationFolder || ''}`;
+  const currentPath = path.join(__dirname, '..', folderStructureSource, fileName);
+  const destinationPath = path.join(__dirname, '..', folderStructureDestination, fileName);
+  
+
+  // Check if source file exists
+  if (!fs.existsSync(currentPath)) {
+    return res.status(404).json({ message: "Source file not found" });
+  }
+
+  try {
+    mv(currentPath, destinationPath, function (err) {
+      if (err) {
+        console.error("Move Error", err);
+        return res.status(500).json({ message: "File move failed", error: err });
+      } else {
+        console.log("Successfully moved");
+        res.json({ message: "Successfully moved", fileName,currentPath, destinationPath });
+      }
+    });
+  } catch (error) {
+    console.error("Move Error (Synchronous)", error);
+    return res.status(500).json({ message: "File move failed", error: error });
+  }
+};

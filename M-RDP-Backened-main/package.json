@@ -1,0 +1,45 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "body-parser": "^1.20.2",
+    "child_process": "^1.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.18.2",
+    "express-jwt": "^5.3.1",
+    "express-validator": "^6.2.0",
+    "google-auth-library": "^8.7.0",
+    "jsdom": "^22.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.10.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "mv": "^2.1.1",
+    "node-powershell": "^5.0.1",
+    "node-ssh": "^13.1.0",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^1.19.4",
+    "os": "^0.1.2",
+    "pdfkit": "^0.13.0",
+    "razorpay": "^2.9.2",
+    "ssh2": "^1.11.0",
+    "ssh2-sftp-client": "^9.1.0",
+    "tar-fs": "^3.0.4",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.8",
+    "mocha": "^10.2.0"
+  }
+}

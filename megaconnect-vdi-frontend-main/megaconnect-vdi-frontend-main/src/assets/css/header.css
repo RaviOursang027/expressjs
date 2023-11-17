@@ -1,0 +1,167 @@
+.headerBg { 
+    background-color: #2d9bf0;
+    color: #fff;
+}
+
+.headerBg ul {
+    list-style-type: none;
+    font-size: 18px;
+    text-align: center;
+    display: table;
+    margin: 18px auto 14px;
+}
+
+.headerBg ul li {
+    float: left;
+    padding: 0 25px;
+    cursor: pointer;
+}
+
+.headerBg ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.headerBg ul li a:hover, .headerBg ul li.selected {
+    font-weight: 800;
+}
+
+.logout {
+    padding-top: 4px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    text-align: right;
+}
+
+.headerHr {
+    border-top: 1px solid #ddd;
+    height: 5px;
+    max-width: 1396px;
+    margin: auto;
+}
+
+.breadcrumbs {
+    background-color: #2d9bf0;
+    margin-top: -4px;
+    padding: 15px 0;
+}
+.breadcrumbs p {    
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+}
+.breadcrumbs p {    
+    color: #fff;
+}
+
+
+.footerBg { 
+    background-color: #2d9bf0;
+    margin-top: 40px;
+    font-size: 12px;
+    width: 100%;
+    /* height: 40px; */
+}
+.footerBg p {
+    color: #fff;
+    padding-top: 5px !important;
+}
+.footerBg .MuiGrid-root { 
+    padding-top: 0px !important;
+}
+.footerBg a {
+    color: #fff;
+    margin-right: 10px;
+    position: relative;
+    top: 8px;
+}
+
+.log-menu{
+
+    display: flex;
+
+    justify-content: flex-end;
+
+}
+
+.menu {
+
+    display: none;
+
+  }
+
+ 
+
+  @media (max-width: 776px) {
+
+    .menu {
+
+      display: block;
+
+      margin-top: 3px;
+
+    }
+
+  }
+
+  .drawer-content {
+
+    width: 250px;
+
+    padding: 20px;
+    height: 100%;
+    background-color: #2d9bf0;
+
+  }
+
+ 
+
+  .drawer-content ul {
+
+    list-style: none;
+
+    padding: 0;
+
+    margin: 0;
+
+  }
+
+ 
+
+  .drawer-content li {
+
+    padding: 10px 0;
+
+    border-bottom: 1px solid #fff;
+
+  }
+
+ 
+
+  .drawer-content a {
+
+    text-decoration: none;
+
+    color: #fff;
+
+  }
+
+ 
+
+  .drawer-content a:hover {
+
+    font-weight: 900;
+
+  }
+
+ 
+
+  .drawer-content .selected {
+
+    font-weight: bold;
+
+   
+
+  }

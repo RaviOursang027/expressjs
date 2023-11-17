@@ -1,0 +1,190 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
+
+.vm-text{
+
+ 
+
+    position: relative;
+
+  }
+
+  .vm-text span {
+
+    position: relative;
+
+    display: inline-block;
+
+    font-size: 25px;
+
+    font-family: 'Rubik Mono One', sans-serif;
+
+    color: deepskyblue;
+
+    text-transform: uppercase;
+
+    animation: flip 15s infinite;
+
+    animation-delay: calc(.2s * var(--i))
+
+  }
+
+  @keyframes flip {
+
+    0%, 100% {
+
+      transform: rotateY(0deg);
+
+    }
+
+    50% {
+
+      transform: rotateY(180deg);
+
+    }
+
+  }
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  .container-carousel{
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    /* gap: 10px; */
+
+    }
+
+   .slider{
+
+    width: 600px;
+
+    z-index: 20;
+
+    margin-top: 10px;
+
+   }
+
+ 
+
+    .container-carousel ul{
+
+   
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      /* z-index: 0; */
+
+      /* flex-direction: column; */
+
+    }
+
+    .container-carousel ul li{
+
+      list-style: none;
+
+      cursor: pointer;
+
+      margin: 10px;
+
+    }
+
+    .container-carousel ul li video{
+
+      /* width: 500px; */
+
+      transition: all 0.5s ease-in;
+
+      border-radius: 10px;
+
+    overflow: hidden;
+
+    }
+
+    .container-carousel ul li video:hover{
+
+      transform: scale(1.1);
+
+     
+
+    }
+
+   
+
+    .container-carousel ul li:first-child {
+
+      position: absolute;
+
+      left: 33%;
+
+      transform: translateX(-50%);
+
+    }
+
+    .container-carousel ul li:nth-child(2) {
+
+      position: absolute;
+
+      left: 66%;
+
+      transform: translateX(-50%);
+
+      z-index: 1;
+
+      /* border: 2px solid yellow; */
+
+    }
+
+    .container-carousel ul li:nth-child(3) {
+
+      position: absolute;
+
+      /* Add your desired positioning properties for the second <li> here */
+
+      left: 75%;
+
+      transform: translateX(-50%);
+
+     
+
+     
+
+    }
+
+    .container-carousel ul li #video1{
+
+      width: 500px;
+
+    }
+
+   
+
+    .container-carousel ul li #video2{
+
+      width: 500px;
+
+    }
+
+    .container-carousel ul li #video3{
+
+      width: 450px;
+
+    }

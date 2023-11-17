@@ -1,0 +1,9 @@
+check if user is trying to signin but havent signup yet
+check if password match with hashed_password that is saved in db
+if yes, generate token with expiry
+the token will sent to client/react
+it will be used as jwt based authentication system
+we can allow user to access protected routes later if they have valid token 
+so jwt token is like password with expiry
+in successful signin we will send user info and valid token
+this token will be send back to server from client/react to access protected routes.

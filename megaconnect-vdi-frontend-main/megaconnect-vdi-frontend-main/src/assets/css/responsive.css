@@ -1,0 +1,92 @@
+@media screen and (max-width: 776px){
+
+    /*header*/
+
+    .css-vok43g-MuiGrid-root{
+
+      display: none;
+
+    }
+   
+    /*Overview*/
+
+   .overviewBg{
+
+    display: flex;
+
+    flex-direction: column;
+
+    margin-block: 45px;
+
+   }
+
+   .css-hagxv6-MuiGrid-root{
+
+    width: 100%;
+
+   }
+
+   .css-1lym95h-MuiGrid-root{
+
+    margin-top: 60px;
+
+   }  
+
+   .css-1ube6tp-MuiGrid-root{
+
+    width: 100%;
+
+   }
+   .view{
+    font-size: 20px;
+   }
+ 
+
+  }
+
+  @media screen and (max-width: 491px){
+
+   .view{
+    font-size: 20px;
+   }
+   
+
+  }
+
+  @media screen and (max-width: 950px) {
+
+    .overviewBg{
+  
+      display: flex;
+  
+      flex-direction: column;
+  
+      margin-block: 45px;
+  
+     }
+  
+     .css-hagxv6-MuiGrid-root{
+  
+      width: 100%;
+  
+     }
+  
+     .css-1lym95h-MuiGrid-root{
+  
+      margin-top: 60px;
+  
+     }  
+  
+     .css-1ube6tp-MuiGrid-root{
+  
+      width: 100%;
+  
+     }
+  
+  }
+
+  .bgcolor{
+    min-height: 100vh;
+    background-color: #ECEFF1;
+    background:linear-gradient(158deg,rgb(224,224,224) 0% , rgb(233,237,254)100%)
+  }
